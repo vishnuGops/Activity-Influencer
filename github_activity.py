@@ -1,7 +1,6 @@
 from github import Github
-import random
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Your GitHub personal access token - Generate one in your GitHub account settings
 ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
@@ -24,13 +23,13 @@ file_content = 'Initial commit'
 
 
 def update_and_delete_file():
-    today = datetime.now().date()
+    today = datetime.now()
 
     # Randomly select the number of commits
-    num_commits = random.randint(2, 6)
-    print("Num of commits: ", num_commits)
+    # num_commits = random.randint(2, 6)
+    num_commits = input("Num of commits: ")
 
-    for i in range(num_commits):
+    for i in range(int(num_commits)):
         # Randomly pick a time within the last 10 days
         commit_date = today
 
