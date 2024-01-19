@@ -1,6 +1,14 @@
+import logging
 from github import Github
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
+import time
+
+# Configure logging
+logging.basicConfig(filename='C:/Users/Vishnu-Server/Desktop/Coding/Activity-Influencer/activity_log.txt', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.info(f'Github Activity Influencer Started: Logging all info')
 
 # Your GitHub personal access token - Generate one in your GitHub account settings
 ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
@@ -9,39 +17,62 @@ ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
 repo_owner = 'vishnugops'
 repo_name = 'Activity-Influencer'
 
+
 g = Github(ACCESS_TOKEN)
 repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # File details
 file_name = 'activity.txt'
-file_content = 'Initial commit'
 
-# Create the initial file
-# repo.create_file(file_name, 'Initial commit', file_content, branch='main')
-
-# Function to update and delete the file
+# Function to update and delete file
 
 
 def update_and_delete_file():
-    today = datetime.now()
+    while True:
+        today = datetime.now()
+        logging.info(f'Checking date and time on {today}')
+        # Check if it's 11:50 pm
+        if today.hour == 23 and today.minute == 50:
+            logging.info(f'It is 11:50, checking commits at : {today} ')
+            # Check the number of commits for the day
+            commits_today = list(repo.get_commits(since=today.replace(hour=0, minute=0, second=0, microsecond=0),
+                                                  until=today.replace(hour=23, minute=59, second=59, microsecond=999999)))
 
-    # Randomly select the number of commits
-    # num_commits = random.randint(2, 6)
-    num_commits = input("Num of commits: ")
+            if len(commits_today) == 0:
+                # If no commits for the day, generate random commits between 2 and 16
+                num_commits = random.randint(2, 16)
+                logging.info(f'Random number of commints : {num_commits}')
 
-    for i in range(int(num_commits)):
-        # Randomly pick a time within the last 10 days
-        commit_date = today
+                for i in range(num_commits):
+                    # Randomly pick a time within the last 10 days
+                    commit_date = today - timedelta(days=random.randint(0, 10))
 
-        # Update the file content with commit information
-        new_content = f'Commit {i + 1} on {commit_date}'
-        commit_message = f'Commit {i + 1} - {commit_date}'
-        contents = repo.get_contents(file_name, ref='main')
-        repo.update_file(contents.path, commit_message,
-                         new_content, contents.sha, branch='main')
+                    # Update the file content with commit information
+                    new_content = f'Commit {i + 1} on {commit_date}'
+                    commit_message = f'Commit {i + 1} - {commit_date}'
+                    contents = repo.get_contents(file_name, ref='main')
+                    repo.update_file(contents.path, commit_message,
+                                     new_content, contents.sha, branch='main')
 
-        print(f'Committed change {i + 1} on {commit_date}')
+                    logging.info(f'Committed change {i + 1} on {commit_date}')
+            else:
+                logging.info(
+                    f'Commits already made for today: {len(commits_today)}')
+
+            # Calculate the sleep duration until the next day
+            sleep_seconds = (23 * 3600) + (55 * 60)
+            logging.info(
+                f'Waiting for {sleep_seconds} seconds until 11:50 pm next day...')
+            time.sleep(sleep_seconds)
+        else:
+            logging.info("It's not 11:50, not checking for commits")
+            # Calculate the sleep duration until it's 11:50 pm
+            sleep_seconds = abs((23 - today.hour) * 3600 +
+                                (50 - today.minute) * 60)
+            logging.info(
+                f'Waiting for {sleep_seconds} seconds until today 11:50 pm...')
+            time.sleep(sleep_seconds)
 
 
-# Create commits and delete file
+# Run the function
 update_and_delete_file()
