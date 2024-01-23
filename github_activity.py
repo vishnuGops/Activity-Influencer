@@ -10,10 +10,14 @@ import time
 logging.basicConfig(filename='../activity_log.txt', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Function to print and log the info
+
 
 def print_and_log(str):
     logging.info(str)
     print(str)
+
+# Function to calculate the time until commits are checked
 
 
 def time_until_target(target_hour, target_minute, today):
@@ -36,33 +40,11 @@ def time_until_target(target_hour, target_minute, today):
     return seconds_until_target
 
 
-print_and_log(
-    f'****************************Github Activity Influencer Started****************************')
-
-
-# Your GitHub personal access token - Generate one in your GitHub account settings
-ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
-
-# Your repository details
-repo_owner = 'vishnugops'
-repo_name = 'Activity-Influencer'
-
-
-# set time for running the commits check
-target_hour = 23
-target_minute = 30
-
-
-g = Github(ACCESS_TOKEN)
-repo = g.get_user(repo_owner).get_repo(repo_name)
-
-# File details
-file_name = '../activity_log.txt'
-
 # Function to update and delete file
-
-
 def update_and_delete_file():
+    print_and_log(
+        f'****************************Github Activity Influencer Started****************************')
+
     while True:
         today = datetime.now()
         print_and_log(f'Checking date and time on {today}')
@@ -113,6 +95,28 @@ def update_and_delete_file():
                 f'Waiting for {seconds_until_target} seconds until today ' + str(target_hour) + ':' +
                 str(target_minute) + '...')
             time.sleep(seconds_until_target)
+
+# Main code
+
+
+# Your GitHub personal access token - Generate one in your GitHub account settings
+ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
+
+# Your repository details
+repo_owner = 'vishnugops'
+repo_name = 'Activity-Influencer'
+
+
+# set time for running the commits check
+target_hour = 23
+target_minute = 30
+
+
+g = Github(ACCESS_TOKEN)
+repo = g.get_user(repo_owner).get_repo(repo_name)
+
+# File details
+file_name = '../activity_log.txt'
 
 
 # Run the function
