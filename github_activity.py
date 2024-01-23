@@ -16,6 +16,26 @@ def print_and_log(str):
     print(str)
 
 
+def time_until_target(target_hour, target_minute, today):
+    # Create target time with today's date
+    target_time = datetime.combine(
+        datetime.today(), datetime.min.time())
+    target_time += timedelta(hours=target_hour, minutes=target_minute)
+
+    # If target time has already passed for today, add a day to the target time
+    if target_time < datetime.now():
+        target_time += timedelta(days=1)
+
+    # Calculate time difference
+    time_difference = target_time - \
+        datetime.combine(datetime.today(), today.time())
+
+    # Convert time difference to seconds
+    seconds_until_target = max(time_difference.total_seconds(), 0)
+
+    return seconds_until_target
+
+
 print_and_log(
     f'****************************Github Activity Influencer Started****************************')
 
@@ -29,15 +49,15 @@ repo_name = 'Activity-Influencer'
 
 
 # set time for running the commits check
-hour = 00
-min = 15
+target_hour = 23
+target_minute = 30
 
 
 g = Github(ACCESS_TOKEN)
 repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # File details
-file_name = 'activity.txt'
+file_name = '../activity_log.txt'
 
 # Function to update and delete file
 
@@ -47,9 +67,9 @@ def update_and_delete_file():
         today = datetime.now()
         print_and_log(f'Checking date and time on {today}')
         # Check if it's 11:50 pm
-        if today.hour == hour and today.minute == min:
-            print_and_log(f'It is ' + str(hour) + ":" +
-                          str(min) + ' , checking commits at : {today} ')
+        if today.hour == target_hour and today.minute == target_minute:
+            print_and_log(f'It is ' + str(target_hour) + ":" +
+                          str(target_minute) + f' , checking commits at : {today}')
             # Check the number of commits for the day
             commits_today = list(repo.get_commits(since=today.replace(hour=0, minute=0, second=0, microsecond=0),
                                                   until=today.replace(hour=23, minute=59, second=59, microsecond=999999)))
@@ -76,21 +96,23 @@ def update_and_delete_file():
                     f'Commits already made for today - {today} : {len(commits_today)}')
 
             # Calculate the sleep duration until the next day
-            sleep_seconds = (23 * 3600) + (55 * 60)
+            seconds_until_target = time_until_target(
+                target_hour, target_minute, today)
             print_and_log(
-                f'Waiting for {sleep_seconds} seconds until ' + str(hour) + ":" +
-                str(min) + ' next day...')
-            time.sleep(sleep_seconds)
+                f'Waiting for {seconds_until_target} seconds until ' + str(target_hour) + ":" +
+                str(target_minute) + ' next day...')
+            time.sleep(seconds_until_target)
         else:
-            print_and_log("It's not " + str(hour) + ':' +
-                          str(min) + " , not checking for commits")
+            print_and_log("It's not " + str(target_hour) + ':' +
+                          str(target_minute) + " , not checking for commits")
             # Calculate the sleep duration until it's 11:50 pm
-            sleep_seconds = abs((hour - today.hour) * 3600 +
-                                (min - today.minute) * 60)
+            seconds_until_target = time_until_target(
+                target_hour, target_minute, today)
+
             print_and_log(
-                f'Waiting for {sleep_seconds} seconds until today ' + str(hour) + ':' +
-                str(min) + '...')
-            time.sleep(sleep_seconds)
+                f'Waiting for {seconds_until_target} seconds until today ' + str(target_hour) + ':' +
+                str(target_minute) + '...')
+            time.sleep(seconds_until_target)
 
 
 # Run the function

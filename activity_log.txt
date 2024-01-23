@@ -6,3 +6,11 @@
 2024-01-19 15:01:28,116 - INFO - Checking date and time on 2024-01-19 15:01:28.116314
 2024-01-19 15:01:28,116 - INFO - It's not 11:50, not checking for commits
 2024-01-19 15:01:28,117 - INFO - Waiting for 31740 seconds until today 11:50 pm...
+2024-01-23 11:31:09,845 - INFO - ****************************Github Activity Influencer Started****************************
+2024-01-23 11:31:11,105 - INFO - Checking date and time on 2024-01-23 11:31:11.105822
+2024-01-23 11:31:11,106 - INFO - It's not 11:35 , not checking for commits
+2024-01-23 11:31:11,106 - INFO - Waiting for 228.894178 seconds until today 11:35...
+2024-01-23 11:35:00,001 - INFO - Checking date and time on 2024-01-23 11:35:00.001773
+2024-01-23 11:35:00,001 - INFO - It is 11:35 , checking commits at : {today} 
+2024-01-23 11:35:00,889 - INFO - Commits already made for today - 2024-01-23 11:35:00.001773 : 2
+2024-01-23 11:35:00,890 - INFO - Waiting for 86399.998227 seconds until 11:35 next day...
