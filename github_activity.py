@@ -7,7 +7,7 @@ import time
 
 
 # Configure logging
-logging.basicConfig(filename='C:/Users/Vishnu-Server/Desktop/Coding/Activity-Influencer/activity_log.txt', level=logging.INFO,
+logging.basicConfig(filename='../activity_log.txt', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 
@@ -28,6 +28,11 @@ repo_owner = 'vishnugops'
 repo_name = 'Activity-Influencer'
 
 
+# set time for running the commits check
+hour = 00
+min = 15
+
+
 g = Github(ACCESS_TOKEN)
 repo = g.get_user(repo_owner).get_repo(repo_name)
 
@@ -42,8 +47,9 @@ def update_and_delete_file():
         today = datetime.now()
         print_and_log(f'Checking date and time on {today}')
         # Check if it's 11:50 pm
-        if today.hour == 23 and today.minute == 50:
-            print_and_log(f'It is 11:50, checking commits at : {today} ')
+        if today.hour == hour and today.minute == min:
+            print_and_log(f'It is ' + str(hour) + ":" +
+                          str(min) + ' , checking commits at : {today} ')
             # Check the number of commits for the day
             commits_today = list(repo.get_commits(since=today.replace(hour=0, minute=0, second=0, microsecond=0),
                                                   until=today.replace(hour=23, minute=59, second=59, microsecond=999999)))
@@ -72,15 +78,18 @@ def update_and_delete_file():
             # Calculate the sleep duration until the next day
             sleep_seconds = (23 * 3600) + (55 * 60)
             print_and_log(
-                f'Waiting for {sleep_seconds} seconds until 11:50 pm next day...')
+                f'Waiting for {sleep_seconds} seconds until ' + str(hour) + ":" +
+                str(min) + ' next day...')
             time.sleep(sleep_seconds)
         else:
-            print_and_log("It's not 11:50, not checking for commits")
+            print_and_log("It's not " + str(hour) + ':' +
+                          str(min) + " , not checking for commits")
             # Calculate the sleep duration until it's 11:50 pm
-            sleep_seconds = abs((23 - today.hour) * 3600 +
-                                (50 - today.minute) * 60)
+            sleep_seconds = abs((hour - today.hour) * 3600 +
+                                (min - today.minute) * 60)
             print_and_log(
-                f'Waiting for {sleep_seconds} seconds until today 11:50 pm...')
+                f'Waiting for {sleep_seconds} seconds until today ' + str(hour) + ':' +
+                str(min) + '...')
             time.sleep(sleep_seconds)
 
 
