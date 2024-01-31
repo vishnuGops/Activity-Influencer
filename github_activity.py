@@ -1,13 +1,14 @@
 import logging
 from github import Github
 import os
+from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import random
 import time
 
 
 # Configure logging
-logging.basicConfig(filename='../activity_log.txt', level=logging.INFO,
+logging.basicConfig(filename='activity_log.txt', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Function to print and log the info
@@ -100,7 +101,8 @@ def update_and_delete_file():
 
 
 # Your GitHub personal access token - Generate one in your GitHub account settings
-ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
+load_dotenv('token.env')
+ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
 
 # Your repository details
 repo_owner = 'vishnugops'
@@ -116,7 +118,7 @@ g = Github(ACCESS_TOKEN)
 repo = g.get_user(repo_owner).get_repo(repo_name)
 
 # File details
-file_name = '../activity_log.txt'
+file_name = 'activity.txt'
 
 
 # Run the function
