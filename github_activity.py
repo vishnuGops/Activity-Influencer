@@ -8,7 +8,7 @@ import time
 
 
 # Configure logging
-logging.basicConfig(filename='activity_log.txt', level=logging.INFO,
+logging.basicConfig(filename='../activity_log.txt', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Function to print and log the info
@@ -59,7 +59,7 @@ def update_and_delete_file():
 
             if len(commits_today) == 0:
                 # If no commits for the day, generate random commits between 2 and 16
-                num_commits = random.randint(2, 16)
+                num_commits = random.randint(2, 6)
                 print_and_log(f'Random number of commits : {num_commits}')
 
                 for i in range(num_commits):
@@ -97,12 +97,28 @@ def update_and_delete_file():
                 str(target_minute) + '...')
             time.sleep(seconds_until_target)
 
+# Function to read API key from file
+
+
+def read_api_key(file_path='../token.env'):
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                key, value = map(str.strip, line.split('=', 1))
+                if key == 'GITHUB_API_KEY':
+                    return value
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+    except Exception as e:
+        print(f"Error reading file: {e}")
+
+    return None
+
+
 # Main code
 
-
 # Your GitHub personal access token - Generate one in your GitHub account settings
-load_dotenv('token.env')
-ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
+ACCESS_TOKEN = read_api_key()
 
 # Your repository details
 repo_owner = 'vishnugops'
