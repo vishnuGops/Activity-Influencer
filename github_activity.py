@@ -127,7 +127,7 @@ repo_name = 'Activity-Influencer'
 
 # set time for running the commits check
 target_hour = 23
-target_minute = 30
+target_minute = 52
 
 
 g = Github(ACCESS_TOKEN)
