@@ -54,13 +54,14 @@ def update_and_delete_file():
             print_and_log(f'It is ' + str(target_hour) + ":" +
                           str(target_minute) + f' , checking commits at : {today}')
             # Check the number of commits for the day
-            commits_today = list(repo.get_commits(since=today.replace(hour=0, minute=0, second=0, microsecond=0),
+            commits_today = list(repo.get_commits(since=today.replace(hour=4, minute=0, second=0, microsecond=0),
                                                   until=today.replace(hour=23, minute=59, second=59, microsecond=999999)))
 
-            if len(commits_today) == 0:
+            if len(commits_today) >= 0:
                 # If no commits for the day, generate random commits between 2 and 16
-                num_commits = random.randint(2, 6)
-                print_and_log(f'Random number of commits : {num_commits}')
+                num_commits = random.randint(2, 12)
+                print_and_log(
+                    f'No Commits made today, Random number of commits : {num_commits}')
 
                 for i in range(num_commits):
                     # Randomly pick a time within the last 10 days
@@ -127,7 +128,7 @@ repo_name = 'Activity-Influencer'
 
 # set time for running the commits check
 target_hour = 23
-target_minute = 52
+target_minute = 30
 
 
 g = Github(ACCESS_TOKEN)
