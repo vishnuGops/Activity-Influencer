@@ -41,6 +41,27 @@ def time_until_target(target_hour, target_minute, today):
     return seconds_until_target
 
 
+# num of commits is determined from a normal curve
+
+def number_from_normal_curve(min_value, max_value, mu, sigma):
+    """
+    Generate a random number from a normal distribution within a specified range.
+
+    Parameters:
+        min_value (float): Minimum value of the range.
+        max_value (float): Maximum value of the range.
+        mu (float): Mean of the normal distribution.
+        sigma (float): Standard deviation of the normal distribution.
+
+    Returns:
+        float: Random number from the normal distribution within the specified range.
+    """
+    while True:
+        number = random.normalvariate(mu, sigma)
+        if min_value <= number <= max_value:
+            return round(number)
+
+
 # Function to update and delete file
 def update_and_delete_file():
     print_and_log(
@@ -59,7 +80,13 @@ def update_and_delete_file():
 
             if len(commits_today) >= 0:
                 # If no commits for the day, generate random commits between 2 and 16
-                num_commits = random.randint(2, 12)
+                min_value = 2
+                max_value = 14
+                mean_dist = 8
+                std_dev = 2
+                num_commits = number_from_normal_curve(
+                    min_value, max_value, mean_dist, std_dev)
+
                 print_and_log(
                     f'No Commits made today, Random number of commits : {num_commits}')
 
