@@ -6,14 +6,21 @@ from datetime import datetime, timedelta
 import random
 import time
 
+# Version of the app
+
+
+def display_version():
+    version = 1.5
+    print_and_log(
+        f'****************************Github Activity Influencer '+str(version)+' Started****************************')
+
 
 # Configure logging
 logging.basicConfig(filename='../activity_log.txt', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 # Function to print and log the info
-
-
 def print_and_log(str):
     logging.info(str)
     print(str)
@@ -64,9 +71,7 @@ def number_from_normal_curve(min_value, max_value, mu, sigma):
 
 # Function to update and delete file
 def update_and_delete_file():
-    print_and_log(
-        f'****************************Github Activity Influencer Started****************************')
-
+    display_version()
     while True:
         today = datetime.now()
         print_and_log(f'Checking date and time on {today}')
@@ -81,8 +86,8 @@ def update_and_delete_file():
             if len(commits_today) >= 0:
                 # If no commits for the day, generate random commits between 2 and 16
                 min_value = 2
-                max_value = 14
-                mean_dist = 8
+                max_value = 10
+                mean_dist = 6
                 std_dev = 2
                 num_commits = number_from_normal_curve(
                     min_value, max_value, mean_dist, std_dev)
