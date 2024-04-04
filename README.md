@@ -35,11 +35,7 @@ The GitHub skyline is a visual representation of your GitHub contributions, wher
     ```bash
     cd Activity-Influencer
     ```
-3. Install the required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
+    
 ## Usage
 
 1. Configure your GitHub API token in `config.py`.
