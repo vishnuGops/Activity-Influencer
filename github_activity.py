@@ -122,8 +122,8 @@ def update_and_delete_file():
     ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
     repo_owner = 'vishnugops'
     repo_name = 'Activity-Influencer'
-    target_hour = 13
-    target_minute = 46
+    target_hour = 23
+    target_minute = 30
 
     g = Github(ACCESS_TOKEN)
     repo = g.get_user(repo_owner).get_repo(repo_name)

@@ -962,3 +962,7 @@
 2024-04-27 23:55:53,734 - INFO - Checking date and time on 2024-04-27 23:55:53.734660
 2024-04-27 23:55:53,734 - INFO - It's not 23:30 , not checking for commits
 2024-04-27 23:55:53,734 - INFO - Waiting for 84846.26534 seconds until today 23:30...
+2024-04-28 14:39:46,059 - INFO - ****************************Github Activity Influencer 1.6 Started****************************
+2024-04-28 14:39:47,084 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-28 14:39:47.084681
+2024-04-28 14:39:47,084 - INFO - --> It's not 13:46, not checking for commits
+2024-04-28 14:39:47,084 - INFO - --> Waiting for 83172.915319 seconds until 13:46...
