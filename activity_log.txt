@@ -982,3 +982,7 @@
 2024-04-29 18:38:41,341 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-29 18:38:41.341553
 2024-04-29 18:38:41,341 - INFO - --> It's not 23:30, not checking for commits
 2024-04-29 18:38:41,341 - INFO - --> Waiting for 17478.658447 seconds until 23:30...
+2024-04-29 18:58:38,569 - INFO - ****************************Github Activity Influencer 1.7 Started****************************
+2024-04-29 18:58:39,588 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-29 18:58:39.588527
+2024-04-29 18:58:39,589 - INFO - --> It's not 23:30, not checking for commits
+2024-04-29 18:58:39,590 - INFO - --> Waiting for 16280.411473 seconds until 23:30...

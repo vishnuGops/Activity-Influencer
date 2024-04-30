@@ -98,7 +98,6 @@ def read_api_key(file_path):
             for line in file:
                 key, value = map(str.strip, line.split('=', 1))
                 if key == 'GITHUB_API_KEY':
-                    print("API :" + value)
                     return value
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
@@ -131,7 +130,6 @@ def generate_activity_based_on_commits():
     g = Github(ACCESS_TOKEN)
     repo = g.get_user(repo_owner).get_repo(repo_name)
     file_name = 'activity.txt'
-    print(ACCESS_TOKEN)
 
     while True:
         today = datetime.now()
