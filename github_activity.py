@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 
 def display_version():
-    version = 1.6
+    version = 1.7
     print_and_log(
         f'****************************Github Activity Influencer {version} Started****************************')
 
@@ -66,8 +66,8 @@ def check_last_commit_and_generate(repo, file_name):
         if last_commit_date != today:
             # Generate random commits
             min_value = 2
-            max_value = 10
-            mean_dist = 6
+            max_value = 14
+            mean_dist = 8
             std_dev = 2
             num_commits = number_from_normal_curve(
                 min_value, max_value, mean_dist, std_dev)
@@ -92,12 +92,13 @@ def check_last_commit_and_generate(repo, file_name):
 
 
 # Function to read API key from file
-def read_api_key(file_path='../token.env'):
+def read_api_key(file_path):
     try:
         with open(file_path, 'r') as file:
             for line in file:
                 key, value = map(str.strip, line.split('=', 1))
                 if key == 'GITHUB_API_KEY':
+                    print("API :" + value)
                     return value
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
@@ -116,10 +117,12 @@ def number_from_normal_curve(min_value, max_value, mu, sigma):
 
 
 # Main code
-def update_and_delete_file():
+def generate_activity_based_on_commits():
     display_version()
     load_dotenv()  # Load environment variables from .env file
-    ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
+    # ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
+    ACCESS_TOKEN = read_api_key(
+        'C:\\Users\\Vishnu-Server\\Desktop\\Coding\\Activity-Influencer\\token.env')
     repo_owner = 'vishnugops'
     repo_name = 'Activity-Influencer'
     target_hour = 23
@@ -128,6 +131,7 @@ def update_and_delete_file():
     g = Github(ACCESS_TOKEN)
     repo = g.get_user(repo_owner).get_repo(repo_name)
     file_name = 'activity.txt'
+    print(ACCESS_TOKEN)
 
     while True:
         today = datetime.now()
@@ -137,8 +141,11 @@ def update_and_delete_file():
             print_and_log(
                 f'--> It is {target_hour}:{target_minute}, checking commits at: {today}')
             check_last_commit_and_generate(repo, file_name)
-            print_and_log(f'--> Waiting until next day...')
-            time.sleep(60)  # Wait for 60 seconds until the next day
+            seconds_until_target = time_until_target(
+                target_hour, target_minute, today)
+            print_and_log(
+                f'--> Waiting for {seconds_until_target} seconds until {target_hour}:{target_minute}...')
+            time.sleep(seconds_until_target)
             gc.collect()  # Perform garbage collection
         else:
             print_and_log(
@@ -148,7 +155,8 @@ def update_and_delete_file():
             print_and_log(
                 f'--> Waiting for {seconds_until_target} seconds until {target_hour}:{target_minute}...')
             time.sleep(seconds_until_target)
+            gc.collect()  # Perform garbage collection
 
 
 # Run the function
-update_and_delete_file()
+generate_activity_based_on_commits()

@@ -966,3 +966,19 @@
 2024-04-28 14:39:47,084 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-28 14:39:47.084681
 2024-04-28 14:39:47,084 - INFO - --> It's not 13:46, not checking for commits
 2024-04-28 14:39:47,084 - INFO - --> Waiting for 83172.915319 seconds until 13:46...
+2024-04-28 14:57:26,903 - INFO - ****************************Github Activity Influencer 1.6 Started****************************
+2024-04-28 14:57:27,981 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-28 14:57:27.981374
+2024-04-28 14:57:27,981 - INFO - --> It's not 23:30, not checking for commits
+2024-04-28 14:57:27,981 - INFO - --> Waiting for 30752.018626 seconds until 23:30...
+2024-04-28 23:30:00,005 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-28 23:30:00.005098
+2024-04-28 23:30:00,005 - INFO - --> It is 23:30, checking commits at: 2024-04-28 23:30:00.005098
+2024-04-28 23:30:00,709 - INFO - --> Last commit made: 2024-04-28
+2024-04-28 23:30:00,709 - INFO - --> Last commit was made today. No need to generate commits.
+2024-04-28 23:30:00,709 - INFO - --> Waiting until next day...
+2024-04-28 23:31:00,718 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-28 23:31:00.718897
+2024-04-28 23:31:00,718 - INFO - --> It's not 23:30, not checking for commits
+2024-04-28 23:31:00,718 - INFO - --> Waiting for 86339.281103 seconds until 23:30...
+2024-04-29 18:38:40,373 - INFO - ****************************Github Activity Influencer 1.6 Started****************************
+2024-04-29 18:38:41,341 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-29 18:38:41.341553
+2024-04-29 18:38:41,341 - INFO - --> It's not 23:30, not checking for commits
+2024-04-29 18:38:41,341 - INFO - --> Waiting for 17478.658447 seconds until 23:30...
