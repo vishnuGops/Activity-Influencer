@@ -1005,3 +1005,7 @@
 2024-04-29 23:30:13,258 - INFO - --> Committed change 9 on 2024-04-29
 2024-04-29 23:30:14,621 - INFO - --> Committed change 10 on 2024-04-29
 2024-04-29 23:30:14,622 - INFO - --> Waiting for 86399.962139 seconds until 23:30...
+2024-04-30 09:32:06,044 - INFO - ****************************Github Activity Influencer 1.8 Started****************************
+2024-04-30 09:32:07,031 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-04-30 09:32:07.031031
+2024-04-30 09:32:07,031 - INFO - --> It's not 23:30, not checking for commits
+2024-04-30 09:32:07,031 - INFO - --> Waiting for 50272.968969 seconds until 23:30...
