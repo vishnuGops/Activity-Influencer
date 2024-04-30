@@ -3,6 +3,7 @@ import os
 from datetime import datetime, timedelta
 import random
 import time
+import pytz
 import gc  # Importing garbage collector module
 
 from github import Github
@@ -12,7 +13,7 @@ from dotenv import load_dotenv
 
 
 def display_version():
-    version = 1.7
+    version = 1.8
     print_and_log(
         f'****************************Github Activity Influencer {version} Started****************************')
 
@@ -53,17 +54,22 @@ def check_last_commit_and_generate(repo, file_name):
     if commits:
         # Get the latest commit (first in the list)
         last_commit = commits[0]
+        # Assuming last_commit_date is a datetime object in UTC timezone
+        last_commit_date_utc = last_commit.commit.author.date
+        pst_timezone = pytz.timezone('America/Los_Angeles')  # PST timezone
+
+        # Convert UTC datetime to PST datetime
+        last_commit_date_pst = last_commit_date_utc.astimezone(pst_timezone)
+
+        # Extract date component in PST timezone
+        last_commit_date_pst_date = last_commit_date_pst.date()
         print_and_log("--> Last commit made: " +
-                      str(last_commit.commit.author.date.date()))
-
-        # Get the date of the last commit
-        last_commit_date = last_commit.commit.author.date.date()
-
+                      str(last_commit_date_pst_date))
         # Get today's date
         today = datetime.now().date()
 
         # Check if the last commit was made today
-        if last_commit_date != today:
+        if last_commit_date_pst_date != today:
             # Generate random commits
             min_value = 2
             max_value = 14
