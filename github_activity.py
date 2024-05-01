@@ -7,7 +7,6 @@ import pytz
 import gc  # Importing garbage collector module
 
 from github import Github
-from dotenv import load_dotenv
 
 # Version of the app
 
@@ -124,8 +123,6 @@ def number_from_normal_curve(min_value, max_value, mu, sigma):
 # Main code
 def generate_activity_based_on_commits():
     display_version()
-    load_dotenv()  # Load environment variables from .env file
-    # ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
     ACCESS_TOKEN = read_api_key(
         'C:\\Users\\Vishnu-Server\\Desktop\\Coding\\Activity-Influencer\\token.env')
     repo_owner = 'vishnugops'
