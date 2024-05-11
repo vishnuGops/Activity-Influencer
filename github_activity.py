@@ -1,5 +1,4 @@
 import logging
-import os
 from datetime import datetime, timedelta
 import random
 import time
@@ -7,7 +6,6 @@ import pytz
 import gc  # Importing garbage collector module
 
 from github import Github
-from dotenv import load_dotenv
 
 # Version of the app
 
@@ -75,6 +73,7 @@ def check_last_commit_and_generate(repo, file_name):
             max_value = 14
             mean_dist = 8
             std_dev = 2
+            # num_commits = 7
             num_commits = number_from_normal_curve(
                 min_value, max_value, mean_dist, std_dev)
 
@@ -124,8 +123,6 @@ def number_from_normal_curve(min_value, max_value, mu, sigma):
 # Main code
 def generate_activity_based_on_commits():
     display_version()
-    load_dotenv()  # Load environment variables from .env file
-    # ACCESS_TOKEN = os.getenv('GITHUB_API_KEY')
     ACCESS_TOKEN = read_api_key(
         'C:\\Users\\Vishnu-Server\\Desktop\\Coding\\Activity-Influencer\\token.env')
     repo_owner = 'vishnugops'
@@ -142,6 +139,7 @@ def generate_activity_based_on_commits():
         print_and_log(f'**CHECKING DATE AND COMMITS ON --> {today}')
 
         if today.hour == target_hour and today.minute == target_minute:
+            # if True:
             print_and_log(
                 f'--> It is {target_hour}:{target_minute}, checking commits at: {today}')
             check_last_commit_and_generate(repo, file_name)
