@@ -11,7 +11,7 @@ from github import Github
 
 
 def display_version():
-    version = 1.8
+    version = 1.9
     print_and_log(
         f'****************************Github Activity Influencer {version} Started****************************')
 
@@ -69,13 +69,13 @@ def check_last_commit_and_generate(repo, file_name):
         # Check if the last commit was made today
         if last_commit_date_pst_date != today:
             # Generate random commits
-            min_value = 2
-            max_value = 14
-            mean_dist = 8
-            std_dev = 2
-            # num_commits = 7
-            num_commits = number_from_normal_curve(
-                min_value, max_value, mean_dist, std_dev)
+            # min_value = 2
+            # max_value = 14
+            # mean_dist = 8
+            # std_dev = 2
+            # num_commits = number_from_normal_curve(
+            #     min_value, max_value, mean_dist, std_dev)
+            num_commits = random.randint(1, 16)
 
             print_and_log(
                 f'--> No commits made today. Generating {num_commits} random commits...')
@@ -113,6 +113,7 @@ def read_api_key(file_path):
 
 
 # Function to generate a random number from a normal distribution within a specified range
+@DeprecationWarning
 def number_from_normal_curve(min_value, max_value, mu, sigma):
     while True:
         number = random.normalvariate(mu, sigma)

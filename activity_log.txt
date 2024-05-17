@@ -1089,3 +1089,76 @@
 2024-05-11 10:42:02,321 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-11 10:42:02.321594
 2024-05-11 10:42:02,321 - INFO - --> It's not 23:30, not checking for commits
 2024-05-11 10:42:02,321 - INFO - --> Waiting for 46077.678406 seconds until 23:30...
+2024-05-12 16:11:08,241 - INFO - ****************************Github Activity Influencer 1.8 Started****************************
+2024-05-12 16:11:09,329 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-12 16:11:09.329942
+2024-05-12 16:11:09,329 - INFO - --> It's not 23:30, not checking for commits
+2024-05-12 16:11:09,329 - INFO - --> Waiting for 26330.670058 seconds until 23:30...
+2024-05-12 23:30:00,027 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-12 23:30:00.027262
+2024-05-12 23:30:00,027 - INFO - --> It is 23:30, checking commits at: 2024-05-12 23:30:00.027262
+2024-05-12 23:30:02,183 - INFO - --> Last commit made: 2024-05-11
+2024-05-12 23:30:02,183 - INFO - --> No commits made today. Generating 6 random commits...
+2024-05-12 23:30:03,090 - INFO - --> Committed change 1 on 2024-05-12
+2024-05-12 23:30:04,514 - INFO - --> Committed change 2 on 2024-05-12
+2024-05-12 23:30:05,941 - INFO - --> Committed change 3 on 2024-05-12
+2024-05-12 23:30:07,459 - INFO - --> Committed change 4 on 2024-05-12
+2024-05-12 23:30:08,884 - INFO - --> Committed change 5 on 2024-05-12
+2024-05-12 23:30:10,344 - INFO - --> Committed change 6 on 2024-05-12
+2024-05-12 23:30:10,344 - INFO - --> Waiting for 86399.972738 seconds until 23:30...
+2024-05-13 23:30:10,353 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-13 23:30:10.353853
+2024-05-13 23:30:10,353 - INFO - --> It is 23:30, checking commits at: 2024-05-13 23:30:10.353853
+2024-05-13 23:30:11,088 - INFO - --> Last commit made: 2024-05-12
+2024-05-13 23:30:11,088 - INFO - --> No commits made today. Generating 9 random commits...
+2024-05-13 23:30:12,217 - INFO - --> Committed change 1 on 2024-05-13
+2024-05-13 23:30:13,737 - INFO - --> Committed change 2 on 2024-05-13
+2024-05-13 23:30:15,243 - INFO - --> Committed change 3 on 2024-05-13
+2024-05-13 23:30:16,641 - INFO - --> Committed change 4 on 2024-05-13
+2024-05-13 23:30:18,036 - INFO - --> Committed change 5 on 2024-05-13
+2024-05-13 23:30:19,447 - INFO - --> Committed change 6 on 2024-05-13
+2024-05-13 23:30:20,906 - INFO - --> Committed change 7 on 2024-05-13
+2024-05-13 23:30:22,334 - INFO - --> Committed change 8 on 2024-05-13
+2024-05-13 23:30:23,667 - INFO - --> Committed change 9 on 2024-05-13
+2024-05-13 23:30:23,667 - INFO - --> Waiting for 86389.646147 seconds until 23:30...
+2024-05-14 11:31:50,426 - INFO - ****************************Github Activity Influencer 1.8 Started****************************
+2024-05-14 11:31:51,536 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-14 11:31:51.536366
+2024-05-14 11:31:51,536 - INFO - --> It's not 23:30, not checking for commits
+2024-05-14 11:31:51,536 - INFO - --> Waiting for 43088.463634 seconds until 23:30...
+2024-05-14 23:30:00,024 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-14 23:30:00.024377
+2024-05-14 23:30:00,024 - INFO - --> It is 23:30, checking commits at: 2024-05-14 23:30:00.024377
+2024-05-14 23:30:02,276 - INFO - --> Last commit made: 2024-05-13
+2024-05-14 23:30:02,276 - INFO - --> No commits made today. Generating 7 random commits...
+2024-05-14 23:30:03,166 - INFO - --> Committed change 1 on 2024-05-14
+2024-05-14 23:30:04,592 - INFO - --> Committed change 2 on 2024-05-14
+2024-05-14 23:30:06,010 - INFO - --> Committed change 3 on 2024-05-14
+2024-05-14 23:30:07,408 - INFO - --> Committed change 4 on 2024-05-14
+2024-05-14 23:30:08,840 - INFO - --> Committed change 5 on 2024-05-14
+2024-05-14 23:30:10,336 - INFO - --> Committed change 6 on 2024-05-14
+2024-05-14 23:30:11,717 - INFO - --> Committed change 7 on 2024-05-14
+2024-05-14 23:30:11,717 - INFO - --> Waiting for 86399.975623 seconds until 23:30...
+2024-05-15 23:30:11,716 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-15 23:30:11.716402
+2024-05-15 23:30:11,716 - INFO - --> It is 23:30, checking commits at: 2024-05-15 23:30:11.716402
+2024-05-15 23:30:12,514 - INFO - --> Last commit made: 2024-05-14
+2024-05-15 23:30:12,514 - INFO - --> No commits made today. Generating 9 random commits...
+2024-05-15 23:30:13,706 - INFO - --> Committed change 1 on 2024-05-15
+2024-05-15 23:30:15,148 - INFO - --> Committed change 2 on 2024-05-15
+2024-05-15 23:30:16,574 - INFO - --> Committed change 3 on 2024-05-15
+2024-05-15 23:30:17,954 - INFO - --> Committed change 4 on 2024-05-15
+2024-05-15 23:30:19,335 - INFO - --> Committed change 5 on 2024-05-15
+2024-05-15 23:30:20,793 - INFO - --> Committed change 6 on 2024-05-15
+2024-05-15 23:30:22,221 - INFO - --> Committed change 7 on 2024-05-15
+2024-05-15 23:30:23,631 - INFO - --> Committed change 8 on 2024-05-15
+2024-05-15 23:30:25,058 - INFO - --> Committed change 9 on 2024-05-15
+2024-05-15 23:30:25,058 - INFO - --> Waiting for 86388.283598 seconds until 23:30...
+2024-05-16 23:30:13,350 - INFO - **CHECKING DATE AND COMMITS ON --> 2024-05-16 23:30:13.350798
+2024-05-16 23:30:13,350 - INFO - --> It is 23:30, checking commits at: 2024-05-16 23:30:13.350798
+2024-05-16 23:30:14,145 - INFO - --> Last commit made: 2024-05-15
+2024-05-16 23:30:14,145 - INFO - --> No commits made today. Generating 9 random commits...
+2024-05-16 23:30:15,335 - INFO - --> Committed change 1 on 2024-05-16
+2024-05-16 23:30:16,774 - INFO - --> Committed change 2 on 2024-05-16
+2024-05-16 23:30:18,168 - INFO - --> Committed change 3 on 2024-05-16
+2024-05-16 23:30:19,561 - INFO - --> Committed change 4 on 2024-05-16
+2024-05-16 23:30:20,954 - INFO - --> Committed change 5 on 2024-05-16
+2024-05-16 23:30:22,393 - INFO - --> Committed change 6 on 2024-05-16
+2024-05-16 23:30:23,817 - INFO - --> Committed change 7 on 2024-05-16
+2024-05-16 23:30:25,241 - INFO - --> Committed change 8 on 2024-05-16
+2024-05-16 23:30:26,634 - INFO - --> Committed change 9 on 2024-05-16
+2024-05-16 23:30:26,634 - INFO - --> Waiting for 86386.649202 seconds until 23:30...

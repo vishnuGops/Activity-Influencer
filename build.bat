@@ -1,6 +1,6 @@
 @echo off
 echo Setting up environment variables...
-set version=1.8
+set version=1.9
 set exe_name=GitActivity_v%version%.exe
 
 echo Generating executable file...
