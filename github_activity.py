@@ -1,4 +1,5 @@
 import logging
+import os
 import random
 import time
 from datetime import datetime, timedelta
@@ -6,14 +7,24 @@ import pytz
 import gc
 from github import Github
 import tkinter as tk
-from tkinter import messagebox, scrolledtext
+from tkinter import messagebox, scrolledtext, ttk
 import threading
 
 # Constants
-LOG_FILE = '../activity_log.txt'
+APP_FOLDER = "C:\Program Files (x86)\GitAI"
+LOG_FOLDER = os.path.join(APP_FOLDER, "log")
+TOKEN_FOLDER = os.path.join(APP_FOLDER, "token")
+LOG_FILE = os.path.join(LOG_FOLDER, 'activity_log.txt')
+TOKEN_FILE = os.path.join(TOKEN_FOLDER, 'login.txt')
 VERSION = 1.9
 DEFAULT_HOUR = 23
 DEFAULT_MINUTE = 30
+
+
+def setup_folders():
+    """Sets up required folders and logging."""
+    os.makedirs(LOG_FOLDER, exist_ok=True)
+    os.makedirs(TOKEN_FOLDER, exist_ok=True)
 
 
 class GithubActivityInfluencer:
@@ -100,6 +111,7 @@ class AppUI:
         self.activity_thread = None
         self._setup_logging()
         self._create_widgets()
+        self._load_login_state()
 
     def _setup_logging(self):
         """Sets up logging to file and formats log messages."""
@@ -113,9 +125,9 @@ class AppUI:
 
     def _create_widgets(self):
         """Creates and arranges all UI elements."""
-        tk.Label(self.root, text="API Key Path:").grid(row=0, column=0)
-        self.api_key_path = tk.Entry(self.root)
-        self.api_key_path.grid(row=0, column=1)
+        tk.Label(self.root, text="API Key:").grid(row=0, column=0)
+        self.api_key_entry = tk.Entry(self.root)
+        self.api_key_entry.grid(row=0, column=1)
 
         tk.Label(self.root, text="Repo Owner:").grid(row=1, column=0)
         self.repo_owner_entry = tk.Entry(self.root)
@@ -130,13 +142,13 @@ class AppUI:
         self.file_name_entry.grid(row=3, column=1)
 
         tk.Label(self.root, text="Target Hour:").grid(row=4, column=0)
-        self.hour_entry = tk.Entry(self.root)
-        self.hour_entry.insert(0, DEFAULT_HOUR)
+        self.hour_entry = ttk.Combobox(self.root, values=list(range(24)))
+        self.hour_entry.set(DEFAULT_HOUR)
         self.hour_entry.grid(row=4, column=1)
 
         tk.Label(self.root, text="Target Minute:").grid(row=5, column=0)
-        self.minute_entry = tk.Entry(self.root)
-        self.minute_entry.insert(0, DEFAULT_MINUTE)
+        self.minute_entry = ttk.Combobox(self.root, values=list(range(60)))
+        self.minute_entry.set(DEFAULT_MINUTE)
         self.minute_entry.grid(row=5, column=1)
 
         self.start_button = tk.Button(
@@ -148,9 +160,28 @@ class AppUI:
             self.root, width=60, height=20)
         self.log_text.grid(row=7, columnspan=2)
 
+    def _load_login_state(self):
+        """Loads saved login information if it exists."""
+        if os.path.exists(TOKEN_FILE):
+            with open(TOKEN_FILE, 'r') as file:
+                lines = file.readlines()
+                if lines:
+                    self.api_key_entry.insert(0, lines[0].strip())
+                    self.repo_owner_entry.insert(0, lines[1].strip())
+                    self.repo_name_entry.insert(0, lines[2].strip())
+                    self.file_name_entry.insert(0, lines[3].strip())
+
+    def _save_login_state(self):
+        """Saves login information to the token file."""
+        with open(TOKEN_FILE, 'w') as file:
+            file.write(f"{self.api_key_entry.get()}\n")
+            file.write(f"{self.repo_owner_entry.get()}\n")
+            file.write(f"{self.repo_name_entry.get()}\n")
+            file.write(f"{self.file_name_entry.get()}\n")
+
     def start_activity(self):
         """Starts the GitHub Activity Influencer in a separate thread."""
-        api_key = self._read_api_key(self.api_key_path.get())
+        api_key = self.api_key_entry.get()
         if not api_key:
             messagebox.showerror("Error", "Invalid API key.")
             return
@@ -163,25 +194,15 @@ class AppUI:
 
         influencer = GithubActivityInfluencer(
             api_key, repo_owner, repo_name, file_name, target_hour, target_minute)
+        self._save_login_state()
         self.activity_thread = threading.Thread(
             target=influencer.start_activity)
         self.activity_thread.daemon = True
         self.activity_thread.start()
 
-    def _read_api_key(self, file_path):
-        """Reads the API key from a file."""
-        try:
-            with open(file_path, 'r') as file:
-                for line in file:
-                    key, value = map(str.strip, line.split('=', 1))
-                    if key == 'GITHUB_API_KEY':
-                        return value
-        except Exception as e:
-            self.log_message(f"Error reading API key: {e}")
-        return None
-
 
 # Run the Tkinter app
+setup_folders()  # Set up folders on startup
 root = tk.Tk()
 app = AppUI(root)
 root.mainloop()
