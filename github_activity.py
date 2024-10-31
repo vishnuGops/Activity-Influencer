@@ -11,12 +11,12 @@ from tkinter import messagebox, scrolledtext, ttk
 import threading
 
 # Constants
-APP_FOLDER = "C:\Program Files (x86)\GitAI"
+APP_FOLDER = "C:\\Program Files (x86)\\GitAI"
 LOG_FOLDER = os.path.join(APP_FOLDER, "log")
 TOKEN_FOLDER = os.path.join(APP_FOLDER, "token")
 LOG_FILE = os.path.join(LOG_FOLDER, 'activity_log.txt')
-TOKEN_FILE = os.path.join(TOKEN_FOLDER, 'login.txt')
-VERSION = 1.9
+LOGIN_FILE = os.path.join(TOKEN_FOLDER, 'login.txt')
+VERSION = 2.0
 DEFAULT_HOUR = 23
 DEFAULT_MINUTE = 30
 
@@ -36,7 +36,16 @@ class GithubActivityInfluencer:
         self.target_hour = target_hour
         self.target_minute = target_minute
         self.github = Github(api_key)
-        self.repo = self.github.get_user(repo_owner).get_repo(repo_name)
+
+        try:
+            self.repo = self.github.get_user(repo_owner).get_repo(repo_name)
+            self.log_message(
+                f"Login Successful -------> {repo_owner} | {repo_name} ")
+        except Exception as e:
+            error_message = f"Error accessing repository '{
+                repo_owner}/{repo_name}': {e.message}"
+            self.log_message(error_message)
+            raise  # Optionally re-raise the exception if you want it to propagate
 
     def log_message(self, msg):
         logging.info(msg)
@@ -111,6 +120,8 @@ class AppUI:
         self.activity_thread = None
         self._setup_logging()
         self._create_widgets()
+        self.log_message(
+            f"Started Github Activity Influencer {VERSION}")
         self._load_login_state()
 
     def _setup_logging(self):
@@ -126,28 +137,30 @@ class AppUI:
     def _create_widgets(self):
         """Creates and arranges all UI elements."""
         tk.Label(self.root, text="API Key:").grid(row=0, column=0)
-        self.api_key_entry = tk.Entry(self.root)
+        self.api_key_entry = tk.Entry(self.root, width=40)
         self.api_key_entry.grid(row=0, column=1)
 
         tk.Label(self.root, text="Repo Owner:").grid(row=1, column=0)
-        self.repo_owner_entry = tk.Entry(self.root)
+        self.repo_owner_entry = tk.Entry(self.root, width=30)
         self.repo_owner_entry.grid(row=1, column=1)
 
         tk.Label(self.root, text="Repo Name:").grid(row=2, column=0)
-        self.repo_name_entry = tk.Entry(self.root)
+        self.repo_name_entry = tk.Entry(self.root, width=30)
         self.repo_name_entry.grid(row=2, column=1)
 
         tk.Label(self.root, text="File Name:").grid(row=3, column=0)
-        self.file_name_entry = tk.Entry(self.root)
+        self.file_name_entry = tk.Entry(self.root, width=30)
         self.file_name_entry.grid(row=3, column=1)
 
         tk.Label(self.root, text="Target Hour:").grid(row=4, column=0)
-        self.hour_entry = ttk.Combobox(self.root, values=list(range(24)))
+        self.hour_entry = ttk.Combobox(
+            self.root, values=list(range(24)), width=5)
         self.hour_entry.set(DEFAULT_HOUR)
         self.hour_entry.grid(row=4, column=1)
 
         tk.Label(self.root, text="Target Minute:").grid(row=5, column=0)
-        self.minute_entry = ttk.Combobox(self.root, values=list(range(60)))
+        self.minute_entry = ttk.Combobox(
+            self.root, values=list(range(60)), width=5)
         self.minute_entry.set(DEFAULT_MINUTE)
         self.minute_entry.grid(row=5, column=1)
 
@@ -162,8 +175,9 @@ class AppUI:
 
     def _load_login_state(self):
         """Loads saved login information if it exists."""
-        if os.path.exists(TOKEN_FILE):
-            with open(TOKEN_FILE, 'r') as file:
+        if os.path.exists(LOGIN_FILE):
+            self.log_message(f"Login file exists -------> Logging in user.")
+            with open(LOGIN_FILE, 'r') as file:
                 lines = file.readlines()
                 if lines:
                     self.api_key_entry.insert(0, lines[0].strip())
@@ -173,11 +187,13 @@ class AppUI:
 
     def _save_login_state(self):
         """Saves login information to the token file."""
-        with open(TOKEN_FILE, 'w') as file:
+        with open(LOGIN_FILE, 'w') as file:
             file.write(f"{self.api_key_entry.get()}\n")
             file.write(f"{self.repo_owner_entry.get()}\n")
             file.write(f"{self.repo_name_entry.get()}\n")
             file.write(f"{self.file_name_entry.get()}\n")
+            self.log_message(
+                f"Saving login info -------> {self.repo_owner_entry} | {self.repo_name_entry} ")
 
     def start_activity(self):
         """Starts the GitHub Activity Influencer in a separate thread."""
