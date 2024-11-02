@@ -80,7 +80,7 @@ class AppUI:
             file.write(f"{self.repo_name_entry.get()}\n")
             file.write(f"{self.file_name_entry.get()}\n")
             self.log_message(
-                f"Saving login info -------> {self.repo_owner_entry} | {self.repo_name_entry} ")
+                f"Saving login info -------> {self.repo_owner_entry.get()} | {self.repo_name_entry.get()} ")
 
     def start_activity(self):
         api_key = self.api_key_entry.get()

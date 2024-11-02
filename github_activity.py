@@ -77,7 +77,23 @@ class GithubActivityInfluencer:
                 self.check_and_generate_commits()
 
             wait_time = self._time_until_target(today)
-            self.log_message(f'--> Waiting {wait_time} seconds...')
+
+            # Format wait time in hours, minutes, and seconds if greater than 60 seconds
+            if wait_time >= 3600:
+                hours = int(wait_time // 3600)
+                minutes = int((wait_time % 3600) // 60)
+                seconds = int(wait_time % 60)
+                self.log_message(
+                    f'--> Waiting {hours} hours, {minutes} minutes, and {seconds} seconds...')
+            elif wait_time >= 60:
+                minutes = int(wait_time // 60)
+                seconds = int(wait_time % 60)
+                self.log_message(
+                    f'--> Waiting {minutes} minutes and {seconds} seconds...')
+            else:
+                self.log_message(
+                    f'--> Waiting {round(wait_time, 2)} seconds...')
+
             time.sleep(wait_time)
             gc.collect()
 
