@@ -31,6 +31,17 @@ jobs:
           # Add your test commands here, e.g., pytest if using test framework
           echo "No tests configured yet"
 
+      - name: Build with PyInstaller
+        run: |
+          pip install pyinstaller
+          pyinstaller --onefile src/main.py  # Adjust path if necessary
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: activity-influencer-exe
+          path: dist/main.exe
+
       - name: Run application
         run: |
           python src/main.py

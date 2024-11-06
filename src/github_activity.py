@@ -23,8 +23,7 @@ class GithubActivityInfluencer:
             self.log_message(
                 f"Login Successful -------> {repo_owner} | {repo_name} ")
         except Exception as e:
-            error_message = f"Error accessing repository '{
-                repo_owner}/{repo_name}': {e}"
+            error_message = f"Error accessing repository '{repo_owner}/{repo_name}': {e}"
             self.log_message(error_message)
             raise
 
