@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12" # Specify the Python version
 
@@ -37,15 +37,15 @@ jobs:
       - name: Build with PyInstaller
         run: |
           pip install pyinstaller
-          pyinstaller --onefile --name main_${{ env.VERSION }} src/main.py  # Build executable with version in name
+          pyinstaller --onefile --name GitAI_${{ env.VERSION }} src/main.py  # Build executable with version in name
           # Debugging step: Check the contents of the dist folder
           ls -l dist
 
       - name: Upload executable
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: activity-influencer-exe-${{ env.VERSION }}
-          path: dist/main_${{ env.VERSION }} # Updated path, no .exe extension on Linux
+          path: dist/GitAI_${{ env.VERSION }}.exe # Updated path, no .exe extension on Linux
 
       - name: Run application
         run: |
