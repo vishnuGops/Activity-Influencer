@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VERSION: "1.0.0" # Specify the version here
+      VERSION: "2.0.0" # Specify the version here
 
     steps:
       - name: Checkout code
@@ -38,6 +38,8 @@ jobs:
         run: |
           pip install pyinstaller
           pyinstaller --onefile --name main_${{ env.VERSION }} src/main.py  # Build executable with version in name
+          # Debugging step: Check the contents of the dist folder
+          ls -l dist
 
       - name: Upload executable
         uses: actions/upload-artifact@v3
