@@ -37,7 +37,7 @@ jobs:
       - name: Build with PyInstaller
         run: |
           pip install pyinstaller
-          pyinstaller --onefile --name GitAI_${{ env.VERSION }} src/main.py  # Build executable with version in name
+          pyinstaller --onefile --name GitAI_${{ env.VERSION }}.exe src/main.py  # Build executable with version in name
           # Debugging step: Check the contents of the dist folder
           ls -l dist
 
