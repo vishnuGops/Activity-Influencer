@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: activity-influencer-exe-${{ env.VERSION }}
-          path: dist/main_${{ env.VERSION }}.exe # Upload versioned executable
+          path: dist/main_${{ env.VERSION }} # Updated path, no .exe extension on Linux
 
       - name: Run application
         run: |
