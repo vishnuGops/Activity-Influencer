@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      VERSION: "1.0.0" # Specify the version here
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -34,13 +37,13 @@ jobs:
       - name: Build with PyInstaller
         run: |
           pip install pyinstaller
-          pyinstaller --onefile src/main.py  # Adjust path if necessary
+          pyinstaller --onefile --name main_${{ env.VERSION }} src/main.py  # Build executable with version in name
 
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: activity-influencer-exe
-          path: dist/main.exe
+          name: activity-influencer-exe-${{ env.VERSION }}
+          path: dist/main_${{ env.VERSION }}.exe # Upload versioned executable
 
       - name: Run application
         run: |
